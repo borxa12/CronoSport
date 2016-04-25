@@ -1,0 +1,126 @@
+h1 {
+  font-family: "Arial";
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: left;
+  padding-left: 30px;
+}
+
+div {
+  display: float;
+}
+
+body {
+  margin: 0px;
+}
+
+div {
+  position: relative;
+}
+
+table, th, td {
+  border: 1px solid #A82E25;
+  border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+}
+
+th {
+  background-color: #A82E25;
+  color: #F5F5F5;
+}
+
+.boton {
+  display: inline-block;
+  background-color: #F5A236;
+  color: #FFFFFF;
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: "Arial";
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+p {
+  text-align: center;
+}
+
+.imgParrafo {
+  margin: 2px;
+}
+
+.menubar {
+  background-color: #A82E25;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.botonAdd {
+  float: right;
+  border: none;
+  background-color: #F5A236;
+  color: #FFFFFF;
+  padding: 14px 40px;
+  margin-top: 8px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: Arial;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.div_contenedor {
+  padding: 5px;
+}
+
+.div_titulo {
+  font-family: "Arial";
+  color: grey;
+  font-weight: bold;
+  float: left;
+  padding:2px;
+}
+
+.selectDeporte {
+  width: 100%;
+  border: 2px solid #A82E25;
+  border-radius: 5px;
+  padding: 5px;
+  background: white;
+}
+
+.ancho {
+  width: 90%;
+}
+
+input {
+  border: 2px solid #A82E25;
+  border-radius: 5px;
+  padding: 5px;
+  background: white;
+}
+
+textarea {
+  width: 97%;
+  resize: none;
+  border: 2px solid #A82E25;
+  border-radius: 5px;
+  padding: 5px;
+  background: white;
+}
+
+.botonCancelar {
+  text-align: left;
+  padding-top: 8px;
+  margin: 0px;
+}
+
+.tableAncho {
+  width: 100%;
+}

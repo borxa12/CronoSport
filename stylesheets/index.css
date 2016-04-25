@@ -1,0 +1,30 @@
+h1 {
+  font-family: "Arial";
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+a {
+  display: inline-block;
+  background-color: #F5A236;
+  color: #FFFFFF;
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: Arial;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+p {
+  text-align: center;
+}
+
+.color {
+  background-color: #A82E25;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 5px;
+}

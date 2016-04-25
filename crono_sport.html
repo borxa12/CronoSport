@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>Crono Sport</title>
+  <link rel="stylesheet" type="text/css" href="./stylesheets/crono_sport.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="./stylesheets/responsive.css" media="all" />
+</head>
+<body>
+  <div class="menubar col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+      <h1>Bienvenido a CronoSport, {{user_name}}!</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+      <p><a href="{{access_link}}" class="boton">Logout</a></p>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"/></div>
+  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10"/>
+    <table class="tableAncho">
+      <tr>
+        <th>Fecha</th>
+        <th>Deporte</th>
+        <th>Tiempo</th>
+        <th>Distancia</th>
+        <th>Velocidad Media</th>
+        <th>t/100m</th>
+        <th>t/km</th>
+        <th>Notas</th>
+        <th colspan="2">Acciones</th>
+      </tr>
+        {% if entrenamientos.count() > 0 %}
+          {% for entrenamiento in entrenamientos %}
+          <tr>
+            <td>{{entrenamiento.fecha}}</td>
+            <td>{{entrenamiento.deporte}}</td>
+            <td>{{entrenamiento.tiempo_cadena}}</td>
+            <td>{{entrenamiento.distancia}} km</td>
+            <td>{{entrenamiento.vel_media}} km/h</td>
+            <td>{{entrenamiento.tiempo_100m}}</td>
+            <td>{{entrenamiento.tiempo_1km}}</td>
+            <td>{{entrenamiento.notas}}</td>
+            <td><p class="imgParrafo"><a href="./modify?id={{entrenamiento.key.urlsafe()}}" title=""><img alt="Modificar" src="./img/modify.svg"></a></p></td>
+            <td><p class="imgParrafo"><a href="./delete?id={{entrenamiento.key.urlsafe()}}"><img alt="Eliminar" src="./img/delete.svg"></a></p></td>
+          </tr>
+          {% endfor %}
+        {% endif %}
+    </table>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <form id="buttonAdd" action="/add" method="post">
+        <!-- <input id="btnEnviar" type="submit" class="botonAdd" value="Nuevo Entrenamiento" /> -->
+        <p><a href="./add" class="boton">Nuevo Entrenamiento</a></p>
+      </form>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+</body>
+</html>

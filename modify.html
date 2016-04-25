@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>Crono Sport</title>
+  <link rel="stylesheet" type="text/css" href="./stylesheets/crono_sport.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="./stylesheets/responsive.css" media="all" />
+  <script>
+  // Función JavaScript para obtener la fecha
+  function fecha() {
+    horaActual = new Date();
+    dia = horaActual.getDate();
+    if (dia.toString().length == 1) dia = '0' + dia.toString();
+    mes = horaActual.getMonth() + 1;
+    if (mes.toString().length == 1) mes = '0' + mes.toString();
+    ano = horaActual.getFullYear();
+
+    fecha = ano + "-" + mes + "-" + dia;
+
+    document.getElementById("inputFecha").value = fecha;
+  }
+
+  // Función JavaScript para validar los campos de entrada
+  function validate() {
+    var toret = true;
+    var inputFecha = document.getElementById("inputFecha").value;
+    var inputDeporte = document.getElementById("inputDeporte").value;
+    var inputTiempoHoras = document.getElementById("inputTiempoHoras").value;
+    var inputTiempoMinutos = document.getElementById("inputTiempoMinutos").value;
+    var inputTiempoSegundos = document.getElementById("inputTiempoSegundos").value;
+    var inputDistancia = document.getElementById("inputDistancia").value;
+    if(inputFecha == null || inputDeporte == null ||
+        (inputTiempoHoras == 0 && inputTiempoSegundos == 0 && inputTiempoMinutos == 0)) {
+         alert("Falta el TIEMPO!!");
+         toret = false;
+    }
+    if(isNaN(inputDistancia) || inputDistancia <= 0) {
+      alert("Distancia erronea!!");
+      toret = false;
+    }
+    return toret;
+  }
+</script>
+</head>
+<body>
+  <div class="menubar col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+      <h1>Bienvenido a CronoSport, {{user_name}}!</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+      <p><a href="{{access_link}}" class="boton">Logout</a></p>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-1 col-md-2 col-lg-2"/></div>
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8"/>
+      <form id="buttonAdd" onSubmit="return validate();" action="/modify?id={{entrenamiento.key.urlsafe()}}" method="post">
+          <div class="div_contenedor col-xs-12 col-sm-5 col-md-5 col-lg-5" >
+            <div class="div_titulo col-xs-12 col-sm-12 col-md-12 col-lg-12">Fecha:</div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <input id="inputFecha" type="date" name="inputFecha" value="{{entrenamiento.fecha}}" required/>
+            </div>
+          </div>
+          <div class="div_contenedor col-xs-12 col-sm-6 col-md-6 col-lg-6" >
+            <div class="div_titulo col-xs-12 col-sm-12 col-md-12 col-lg-12">Deporte:</div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              {% if entrenamiento.deporte == "Correr" %}
+              <select id="inputDeporte" name="inputDeporte" class="ancho selectDeporte" required>
+                <option value="1" selected>Correr</option>
+                <option value="2">Natación</option>
+                <option value="3">Ciclismo</option>
+              </select>
+              {% endif %}
+              {% if entrenamiento.deporte == "Natacion" %}
+              <select id="inputDeporte" name="inputDeporte" class="ancho selectDeporte" required>
+                <option value="1">Correr</option>
+                <option value="2" selected>Natación</option>
+                <option value="3">Ciclismo</option>
+              </select>
+              {% endif %}
+              {% if entrenamiento.deporte == "Ciclismo" %}
+              <select id="inputDeporte" name="inputDeporte" class="ancho selectDeporte" required>
+                <option value="1">Correr</option>
+                <option value="2">Natación</option>
+                <option value="3" selected>Ciclismo</option>
+              </select>
+              {% endif %}
+            </div>
+          </div>
+          <div class="div_contenedor col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <div class="div_titulo col-xs-12 col-sm-12 col-md-12 col-lg-12">Tiempo:</div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <input id="inputTiempoHoras" type="number" name="inputTiempoHoras" min="0" max="100" value="{{entrenamiento.t_horas}}" required/> horas
+              <input id="inputTiempoMinutos" type="number" name="inputTiempoMinutos" min="0" max="59" value="{{entrenamiento.t_minutos}}" required/> minutos
+              <input id="inputTiempoSegundos" type="number" name="inputTiempoSegundos" min="0" max="59" value="{{entrenamiento.t_segundos}}" required/> segundos
+            </div>
+          </div>
+          <div class="div_contenedor col-xs-12 col-sm-5 col-md-5 col-lg-5" >
+            <div class="div_titulo col-xs-12 col-sm-12 col-md-12 col-lg-12">Distancia:</div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <input id="inputDistancia" type="text" name="inputDistancia" placeholder="0.0 km" value={{entrenamiento.distancia}} required/> kilometros
+            </div>
+          </div>
+          <div class="div_contenedor col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <div class="div_titulo col-xs-12 col-sm-12 col-md-12 col-lg-12">Notas:</div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <textarea id="inputNotas" name="inputNotas" rows="4" maxlength="300">{{entrenamiento.notas}}</textarea>
+            </div>
+          </div>
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <p class="botonCancelar"><a href="./crono_sport" class="boton">Cancelar</a></p>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <input id="btnEnviarNuevo" type="submit" class="botonAdd" value="Modificar Entrenamiento" />
+          </div>
+        </div>
+        <input id="op" type="hidden" name="op" value="{{entrenamiento.key.urlsafe()}}">
+      </form>
+  </div>
+  <div class="col-xs-12 col-sm-1 col-md-2 col-lg-2"></div>
+</body>
+</html>
